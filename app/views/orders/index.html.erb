@@ -1,0 +1,9 @@
+<h1> Hello from orders</h1>
+<%@dishes.each do |dish|%>
+<p><%= dish.name%></p>
+<%end%>
+
+<%= form_with url: '/orders', method: :post, data: { turbo: false} do |f|%>
+    <%= f.collection_check_boxes :ingredient_ids, @ingredients, :id, :name %>
+    <%= f.submit %>
+<%end%>
