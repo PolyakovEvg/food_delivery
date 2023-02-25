@@ -3,7 +3,7 @@
 <p><%= dish.name%></p>
 <%end%>
 
-<%= form_with url: '/orders', method: :post, data: { turbo: false} do |f|%>
+<%= form_with url: '/filtered', method: :post, data: { turbo: false} do |f|%>
     <%= f.collection_check_boxes :ingredient_ids, @ingredients, :id, :name %>
-    <%= f.submit %>
+    <%= f.submit 'Submit'%>
 <%end%>

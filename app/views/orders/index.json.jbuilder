@@ -1,1 +1,1 @@
-json.array! @dishes, :id, :created_at
+json.array! @dishes, :id

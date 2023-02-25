@@ -3,5 +3,6 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   resources :orders, only: %i[index create]
+  post "/filtered", to: "orders#filtered"
   root "orders#index"
 end
