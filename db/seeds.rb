@@ -15,6 +15,5 @@ def seed_db
   data['ingredients'].each do |ingredient|
     Ingredient.find_or_create_by name: ingredient
   end
-
 end
 seed_db

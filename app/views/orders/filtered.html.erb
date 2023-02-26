@@ -1,11 +1,17 @@
-<h2> Исключены игридиенты:</h2>
-<ul class='list-group list-group-flush mb-3'>
-<% @allergies.each do |alergen|%>
-<li class="list-group-item"><%= alergen.name %></li>
-<%end%>
-</ul>
-<%= button_to 'Оформить заказ', orders_path, method: :post, class: 'btn btn-success mb-3'%>
+<% provide :title, 'Заказ'%>
 
+
+<% unless @filtered.empty?%>
+  <h2> Исключены игридиенты:</h2>
+  <ul class='list-group list-group-flush mb-3'>
+    <% @allergens.each do |alergen|%>
+      <li class="list-group-item"><%= alergen.name %></li>
+    <%end%>
+  </ul>
+  <%= form_with url: orders_path, method: :post, data: { turbo: false } do |f|%>
+  <%= f.hidden_field :ingredient_ids %>
+  <%= f.submit 'Оформить заказ'%>
+<%end%>
 <h3>В ваш заказ будут входить следующие блюда:</h3>
 <div class="flex-row d-flex flex-wrap gap-3 justify-content-center">
   <%@filtered.each do |item|%>
@@ -22,3 +28,7 @@
     </div>
   <%end%>
 </div>
+<% else %>
+  <h2> К сожалению, по заданным фильтрам блюд нет в наличии. Свяжитесь с нами и мы попробуем подобрать вам индивидуальный рацион питания
+    <h2>
+    <%end%>

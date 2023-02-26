@@ -6,7 +6,7 @@ class OrdersController < ApplicationController
                           .select('dishes.name, COUNT(dishes_orders.dish_id) AS count')
                           .group('dishes.id')
                           .order('count DESC')
-    @dishes = Dish.order("RANDOM()").limit(8)
+    @dishes = Dish.order('RANDOM()').limit(8)
     @ingredients = Ingredient.all
   end
 
@@ -22,7 +22,7 @@ class OrdersController < ApplicationController
 
   def filtered
     @filtered = Dish.where.not(id: DishesIngredient.where(ingredient_id: ingredient_ids).select(:dish_id))
-    @allergies = Ingredient.where(id: ingredient_ids)
+    @allergens = Ingredient.where(id: ingredient_ids)
     render 'filtered'
   end
 
@@ -31,6 +31,4 @@ class OrdersController < ApplicationController
   def ingredient_ids
     session[:allergens] = params[:ingredient_ids]
   end
-
-  def dishes_filter; end
 end
