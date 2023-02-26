@@ -1,12 +1,24 @@
-В ваш заказ будут входить следующие блюда:
-<% @filtered.each do |item|%>
-<p><%= item.id%> - <%= item.name%></p>
-<% end %>
-
-<ul><h3> Исключены игридиенты:</h3>
+<h2> Исключены игридиенты:</h2>
+<ul class='list-group list-group-flush mb-3'>
 <% @allergies.each do |alergen|%>
-<li><%= alergen.name %></li>
+<li class="list-group-item"><%= alergen.name %></li>
 <%end%>
 </ul>
+<%= button_to 'Оформить заказ', orders_path, method: :post, class: 'btn btn-success'%>
 
-<%= button_to 'Sumbit', orders_path, method: :post%>
+<h3>В ваш заказ будут входить следующие блюда:</h3>
+<div class="flex-row d-flex flex-wrap gap-3 justify-content-center">
+  <%@filtered.each do |item|%>
+    <div class="card mr-2" style="width: 18rem;">
+      <img src="..." class="card-img-top" alt="<%= item.name%>">
+      <div class="card-body">
+        <h5 class="card-title"> <%= item.name%> </h5>
+        <ul> Состав:
+          <%item.ingredients.each do |ingredient|%>
+            <li><%= ingredient.name%></li>
+          <%end%>
+        </ul>
+      </div>
+    </div>
+  <%end%>
+</div>

@@ -1,9 +1,31 @@
-<h1> Hello from orders</h1>
-<%@dishes.each do |dish|%>
-<p><%= dish.name%></p>
-<%end%>
-
+<h2>Выберите ингредиенты, которые необходимо исключить</h2>
 <%= form_with url: '/filtered', method: :post, data: { turbo: false} do |f|%>
-    <%= f.collection_check_boxes :ingredient_ids, @ingredients, :id, :name %>
-    <%= f.submit 'Submit'%>
+  <div class="ingredients check-group d-flex flex-column flex-wrap">
+    <%= f.collection_check_boxes(:ingredient_ids, @ingredients, :id, :name) do |b| %>
+      <div class= "form-check">
+        <%= b.check_box  class: 'form-check-input'%>
+        <%= b.label class: 'form-check-label'%>
+      </div>
+    <%end%>
+  </div>
+  <div class='ingredients-submit mt-3 mb-3'>
+    <%= f.submit 'Убрать ингредиенты', class: 'btn btn-secondary mb-3'%>
+  </div>
 <%end%>
+<h1>В нашем меню представлены</h1>
+<div class="flex-row d-flex flex-wrap gap-3 justify-content-center">
+  <%@dishes.each do |dish|%>
+    <div class="card mr-2" style="width: 18rem;">
+      <img src="..." class="card-img-top" alt="<%= dish.name%>">
+      <div class="card-body">
+        <h5 class="card-title"> <%= dish.name%> </h5>
+        <ul> Состав:
+          <%dish.ingredients.each do |ingredient|%>
+            <li><%= ingredient.name%></li>
+          <%end%>
+        </ul>
+      </div>
+    </div>
+  <%end%>
+</div>
+<a href="#">и многие другие блюда</a>
