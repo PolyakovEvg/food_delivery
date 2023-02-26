@@ -1,6 +1,12 @@
 class OrdersController < ApplicationController
 
     def index
+      @ordered_dishes = Dish.joins(:dishes_orders)
+      .select("dishes.name, COUNT(dishes_orders.dish_id) AS count")
+      .group('dishes.id')
+      .order('count DESC')
+      
+
         @dishes = Dish.all
         @ingredients = Ingredient.all
     end

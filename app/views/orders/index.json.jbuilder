@@ -1,1 +1,1 @@
-json.array! @dishes, :id
+json.array! @ordered_dishes.map {|dish| { name: dish.name, count: dish.count} }
