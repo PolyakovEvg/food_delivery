@@ -16,7 +16,7 @@
 <div class="flex-row d-flex flex-wrap gap-3 justify-content-center">
   <%@dishes.each do |dish|%>
     <div class="card mr-2" style="width: 18rem;">
-      <img src="..." class="card-img-top" alt="<%= dish.name%>">
+      <%= image_tag("#{dish.img}", class: 'card-img', alt: "#{ dish.name }")%>
       <div class="card-body">
         <h5 class="card-title"> <%= dish.name%> </h5>
         <ul> Состав:
@@ -29,3 +29,6 @@
   <%end%>
 </div>
 <a href="#">и многие другие блюда</a>
+
+
+

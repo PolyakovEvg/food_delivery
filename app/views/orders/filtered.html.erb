@@ -4,13 +4,13 @@
 <li class="list-group-item"><%= alergen.name %></li>
 <%end%>
 </ul>
-<%= button_to 'Оформить заказ', orders_path, method: :post, class: 'btn btn-success'%>
+<%= button_to 'Оформить заказ', orders_path, method: :post, class: 'btn btn-success mb-3'%>
 
 <h3>В ваш заказ будут входить следующие блюда:</h3>
 <div class="flex-row d-flex flex-wrap gap-3 justify-content-center">
   <%@filtered.each do |item|%>
     <div class="card mr-2" style="width: 18rem;">
-      <img src="..." class="card-img-top" alt="<%= item.name%>">
+      <%= image_tag("#{item.img}", class: 'card-img', alt: "#{item.name}") %>
       <div class="card-body">
         <h5 class="card-title"> <%= item.name%> </h5>
         <ul> Состав:
