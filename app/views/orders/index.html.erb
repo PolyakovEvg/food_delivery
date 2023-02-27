@@ -1,5 +1,4 @@
 <%= provide :title, 'Главная'%>
-
 <h2>Выберите ингредиенты, которые необходимо исключить</h2>
 <%= form_with url: '/filtered', method: :post, data: { turbo: false} do |f|%>
   <div class="ingredients check-group d-flex flex-column flex-wrap">

@@ -12,8 +12,8 @@ class OrdersController < ApplicationController
 
   def create
     allergens = session[:allergens]
-    order = Order.new
     @filtered = Dish.where.not(id: DishesIngredient.where(ingredient_id: allergens).select(:dish_id))
+    order = Order.new
     order.dishes << @filtered
     order.save
     redirect_to root_path

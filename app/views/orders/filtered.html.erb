@@ -1,33 +1,30 @@
 <% provide :title, 'Заказ'%>
-
-
 <% unless @filtered.empty?%>
-  <h2> Исключены игридиенты:</h2>
+  <% unless @allergens.empty?%>
+    <h2> Исключены игридиенты:</h2>
+  <%end%>
   <ul class='list-group list-group-flush mb-3'>
     <% @allergens.each do |alergen|%>
       <li class="list-group-item"><%= alergen.name %></li>
     <%end%>
   </ul>
-  <%= form_with url: orders_path, method: :post, data: { turbo: false } do |f|%>
-  <%= f.hidden_field :ingredient_ids %>
-  <%= f.submit 'Оформить заказ'%>
-<%end%>
-<h3>В ваш заказ будут входить следующие блюда:</h3>
-<div class="flex-row d-flex flex-wrap gap-3 justify-content-center">
-  <%@filtered.each do |item|%>
-    <div class="card mr-2" style="width: 18rem;">
-      <%= image_tag("#{item.img}", class: 'card-img', alt: "#{item.name}") %>
-      <div class="card-body">
-        <h5 class="card-title"> <%= item.name%> </h5>
-        <ul> Состав:
-          <%item.ingredients.each do |ingredient|%>
-            <li><%= ingredient.name%></li>
-          <%end%>
-        </ul>
+  <%= button_to 'Подтвердить заказ', orders_path, method: :post, class: 'btn btn-success', data: { turbo: false }%>
+  <h3>В ваш заказ будут входить следующие блюда:</h3>
+  <div class="flex-row d-flex flex-wrap gap-3 justify-content-center">
+    <%@filtered.each do |item|%>
+      <div class="card mr-2" style="width: 18rem;">
+        <%= image_tag("#{item.img}", class: 'card-img', alt: "#{item.name}") %>
+        <div class="card-body">
+          <h5 class="card-title"> <%= item.name%> </h5>
+          <ul> Состав:
+            <%item.ingredients.each do |ingredient|%>
+              <li><%= ingredient.name%></li>
+            <%end%>
+          </ul>
+        </div>
       </div>
-    </div>
-  <%end%>
-</div>
+    <%end%>
+  </div>
 <% else %>
   <h2> К сожалению, по заданным фильтрам блюд нет в наличии. Свяжитесь с нами и мы попробуем подобрать вам индивидуальный рацион питания
     <h2>

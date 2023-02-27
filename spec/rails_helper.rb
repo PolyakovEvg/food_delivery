@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
+require 'capybara/rspec'
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 # Prevent database truncation if the environment is production
 abort('The Rails environment is running in production mode!') if Rails.env.production?
+require 'capybara/rails'
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -67,5 +69,12 @@ RSpec.configure do |config|
       with.test_framework :rspec
       with.library :rails
     end
+  end
+  # Capybara
+  config.include Capybara::DSL
+  # Factory bot
+  config.include FactoryBot::Syntax::Methods
+  config.before(:suite) do
+    FactoryBot.find_definitions
   end
 end
