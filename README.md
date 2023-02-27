@@ -1,24 +1,27 @@
-# README
+Установка и запуск
+------------------
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* Скопировать и установить
 
-Things you may want to cover:
+    ```
+    $ git clone https://github.com/PolyakovEvg/food_delivery
+    $ cd food_delivery
+    $ bundle install
+    ```
 
-* Ruby version
+* Создать конфиг для своих настроек бд (`config/database.yml`)
+		
+* Создать базу данных и загрузить схему базы данных
 
-* System dependencies
+	```
+	rails db:setup
+	```
+* Заполнить базу
 
-* Configuration
+    ```
+    $ rails db:seed (из файла 'menu.yml')
+    ```
 
-* Database creation
+* Запустить сервер и открыть в браузере
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* JSON запрос url: 'localhost:3000/orders.json'
